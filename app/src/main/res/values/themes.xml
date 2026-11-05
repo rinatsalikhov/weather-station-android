@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Приложение полностью на Compose, поэтому XML-тема нужна только для окна:
+        убираем заголовок и системные декорации (их рисует Compose через enableEdgeToEdge).
+    -->
+    <style name="Theme.Weather" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

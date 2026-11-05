@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Метеостанция</string>
+
+    <!-- Заголовок экрана — как на веб-странице устройства -->
+    <string name="screen_title">🌤️ Метеостанция</string>
+
+    <string name="action_refresh">Обновить</string>
+    <string name="action_retry">Повторить</string>
+
+    <string name="error_title">Не удалось загрузить данные</string>
+
+    <!-- Иконки-эмодзи для карточек -->
+    <string name="icon_temperature" translatable="false">🌡️</string>
+    <string name="icon_humidity" translatable="false">💧</string>
+    <string name="icon_pressure" translatable="false">🎈</string>
+
+    <string name="temperature">Температура</string>
+    <string name="humidity">Влажность</string>
+    <string name="pressure">Давление</string>
+
+    <!-- Маленькая отметка нормального давления под текущим значением -->
+    <string name="pressure_normal">%1$.0f</string>
+
+    <!-- %1$.1f — число с одним знаком после запятой, %% — знак процента -->
+    <string name="temperature_value">%1$.1f °C</string>
+    <string name="humidity_value">%1$.1f %%</string>
+    <string name="pressure_value">%1$.1f мм</string>
+
+    <!-- Отклонение давления от нормы 760: знак показывается всегда («+7.5», «-3.7») -->
+    <string name="pressure_deviation">%1$+.1f</string>
+
+    <!-- Нижняя строка: «обновлено … · аптайм … · … · IP …» + индикатор Wi-Fi -->
+    <string name="meta_updated">обновлено %1$s</string>
+    <string name="meta_uptime">аптайм %1$d мин %2$d сек</string>
+    <string name="meta_ip">IP %1$s</string>
+    <string name="wifi_label">WiFi</string>
+    <string name="wifi_dbm">%1$d dBm</string>
+    <string name="no_connection">нет связи с устройством</string>
+</resources>

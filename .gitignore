@@ -1,0 +1,25 @@
+# Специфичное для Android Studio / IntelliJ
+*.iml
+.idea/
+.kotlin/
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Локальное окружение
+local.properties
+
+# Сборки и отчёты
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# OS
+.DS_Store
+Thumbs.db
