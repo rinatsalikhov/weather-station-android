@@ -2,6 +2,7 @@ package com.example.weather.di
 
 import com.example.weather.BuildConfig
 import com.example.weather.data.WeatherRepository
+import com.example.weather.data.remote.ConnectRetryInterceptor
 import com.example.weather.data.remote.WeatherApi
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -29,9 +30,12 @@ class AppContainer {
     }
 
     private val okHttpClient = OkHttpClient.Builder()
-        .connectTimeout(15, TimeUnit.SECONDS)
+        .connectTimeout(1, TimeUnit.SECONDS)
         .readTimeout(15, TimeUnit.SECONDS)
         .writeTimeout(15, TimeUnit.SECONDS)
+        .addInterceptor(
+            ConnectRetryInterceptor(maxAttempts = 10, retryDelayMillis = 100),
+        )
         .addInterceptor(
             HttpLoggingInterceptor().apply {
                 level = if (BuildConfig.DEBUG) {

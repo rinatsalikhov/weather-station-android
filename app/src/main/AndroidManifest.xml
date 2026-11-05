@@ -4,6 +4,7 @@
     <!-- Доступ в интернет к вебсервису -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
 
     <!--
         Сервис ESP32 работает по HTTP (не HTTPS) в локальной сети,

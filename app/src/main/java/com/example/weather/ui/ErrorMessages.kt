@@ -1,0 +1,26 @@
+package com.example.weather.ui
+
+import kotlinx.serialization.SerializationException
+import retrofit2.HttpException
+import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+
+internal fun Throwable.errorMessage(): String {
+    val root = generateSequence(this) { it.cause }.last()
+    val reason = when (root) {
+        is UnknownHostException -> "Не удалось определить адрес сервера"
+        is ConnectException -> "Нет связи с сервером: соединение не установлено"
+        is SocketTimeoutException -> "Сервер не ответил: превышено время ожидания"
+        is HttpException -> "Сервер вернул ошибку HTTP ${root.code()}"
+        is SerializationException -> "Сервер вернул данные в неожиданном формате"
+        is IOException -> "Ошибка сети"
+        else -> "Не удалось получить данные с сервера"
+    }
+    return "$reason\n${describeChain()}"
+}
+
+private fun Throwable.describeChain(): String =
+    generateSequence(this) { it.cause }
+        .joinToString(separator = "\n") { "${it.javaClass.name}: ${it.message}" }

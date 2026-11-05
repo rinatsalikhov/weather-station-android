@@ -78,9 +78,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
                         // Связи нет, но старые показания не выбрасываем.
                         WeatherUiState.Success(weather = cached, isStale = true)
                     } else {
-                        WeatherUiState.Error(
-                            message = error.message ?: "Не удалось получить данные с сервера",
-                        )
+                        WeatherUiState.Error(message = error.errorMessage())
                     }
                 }
         } finally {
