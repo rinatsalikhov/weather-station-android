@@ -1,5 +1,6 @@
 package com.example.weather.data.remote
 
+import com.example.weather.BuildConfig
 import okhttp3.Call
 import okhttp3.Connection
 import okhttp3.Interceptor
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit
 
 class ConnectRetryInterceptorTest {
 
-    private val request = Request.Builder().url("http://192.168.1.133/data").build()
+    private val request = Request.Builder().url("http://${BuildConfig.DEVICE_IP}/data").build()
 
     private fun okResponse() = Response.Builder()
         .request(request)

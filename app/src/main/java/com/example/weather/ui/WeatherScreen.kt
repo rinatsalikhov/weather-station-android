@@ -48,6 +48,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.weather.BuildConfig
 import com.example.weather.R
 import com.example.weather.domain.model.Weather
 import com.example.weather.ui.state.WeatherUiState
@@ -445,7 +446,7 @@ private val previewWeather = Weather(
     humidityPercent = 100.0,
     pressureMmHg = 766.0,
     device = "esp32-meteo",
-    ip = "192.168.1.133",
+    ip = BuildConfig.DEVICE_IP,
     uptimeSeconds = 41_026,
     rssiDbm = -62,
     fetchedAtMillis = System.currentTimeMillis(),

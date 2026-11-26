@@ -1,5 +1,6 @@
 package com.example.weather.data.remote.dto
 
+import com.example.weather.BuildConfig
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -16,7 +17,7 @@ class WeatherDtoMapperTest {
     fun `maps dto fields to domain model`() {
         val dto = WeatherResponseDto(
             device = "esp32-meteo",
-            ip = "192.168.1.133",
+            ip = BuildConfig.DEVICE_IP,
             uptimeSeconds = 40820,
             rssiDbm = -61,
             temperatureCelsius = 8.80,
@@ -30,7 +31,7 @@ class WeatherDtoMapperTest {
         assertEquals(100.0, weather.humidityPercent, 0.001)
         assertEquals(766.04, weather.pressureMmHg, 0.001)
         assertEquals("esp32-meteo", weather.device)
-        assertEquals("192.168.1.133", weather.ip)
+        assertEquals(BuildConfig.DEVICE_IP, weather.ip)
         assertEquals(40820L, weather.uptimeSeconds)
         assertEquals(-61, weather.rssiDbm)
         assertEquals(1_700_000_000_000, weather.fetchedAtMillis)
@@ -39,7 +40,7 @@ class WeatherDtoMapperTest {
     @Test
     fun `parses real esp32 response`() {
         val raw = """
-            {"device":"esp32-meteo","ip":"192.168.1.133","uptime_s":40820,
+            {"device":"esp32-meteo","ip":"${BuildConfig.DEVICE_IP}","uptime_s":40820,
              "rssi_dbm":-61,"temperature_c":8.80,"humidity_pct":100.0,
              "pressure_mmhg":766.04}
         """.trimIndent()

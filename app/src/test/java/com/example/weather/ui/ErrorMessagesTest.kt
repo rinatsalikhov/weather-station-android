@@ -1,5 +1,6 @@
 package com.example.weather.ui
 
+import com.example.weather.BuildConfig
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -11,26 +12,30 @@ class ErrorMessagesTest {
 
     @Test
     fun `connect exception is reported as no connection`() {
+        val phoneIp = deviceIpAddress()
+        val ephemeralPort = java.net.ServerSocket(0).use { it.localPort }
         val error = ConnectException(
-            "Failed to connect to /192.168.1.133 (port 80) from /192.168.1.166 (port 60874) after 15000 ms",
+            "Failed to connect to /${BuildConfig.DEVICE_IP} (port 80) from /$phoneIp (port $ephemeralPort) after 15000 ms",
         )
 
         val message = error.errorMessage()
 
         assertTrue(message.startsWith("Нет связи с сервером"))
         assertTrue(message.contains("java.net.ConnectException"))
-        assertTrue(message.contains("192.168.1.133"))
+        assertTrue(message.contains("${BuildConfig.DEVICE_IP}"))
+        assertTrue(message.contains("IP телефона: $phoneIp"))
     }
 
     @Test
     fun `root cause of wrapped exception is classified`() {
-        val error = RuntimeException("request failed", UnknownHostException("192.168.1.133"))
+        val error = RuntimeException("request failed", UnknownHostException("${BuildConfig.DEVICE_IP}"))
 
         val message = error.errorMessage()
 
         assertTrue(message.startsWith("Не удалось определить адрес сервера"))
         assertTrue(message.contains("RuntimeException: request failed"))
-        assertTrue(message.contains("UnknownHostException: 192.168.1.133"))
+        assertTrue(message.contains("UnknownHostException: ${BuildConfig.DEVICE_IP}"))
+        assertTrue(message.contains("IP телефона:"))
     }
 
     @Test
@@ -38,7 +43,8 @@ class ErrorMessagesTest {
         val message = SocketTimeoutException("connect timed out").errorMessage()
 
         assertTrue(message.startsWith("Сервер не ответил"))
-        assertEquals(2, message.lines().size)
+        assertEquals(3, message.lines().size)
+        assertTrue(message.contains("IP телефона:"))
     }
 
     @Test
@@ -47,5 +53,6 @@ class ErrorMessagesTest {
 
         assertTrue(message.startsWith("Не удалось получить данные"))
         assertTrue(message.contains("java.lang.IllegalStateException: boom"))
+        assertTrue(message.contains("IP телефона:"))
     }
 }

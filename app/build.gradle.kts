@@ -23,7 +23,9 @@ android {
         versionName = "1.0"
 
         // Параметры вебсервиса (ESP32 в локальной сети).
-        buildConfigField("String", "BASE_URL", "\"http://192.168.1.133/\"")
+        val deviceIp = "192.168.1.133"
+        buildConfigField("String", "DEVICE_IP", "\"$deviceIp\"")
+        buildConfigField("String", "BASE_URL", "\"http://$deviceIp/\"")
     }
 
     buildFeatures {
